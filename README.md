@@ -1,3 +1,3 @@
 # Codigo Oficial
 
-Codigo Oficial feito em java para a competi�ção da First Robotics Competition
+Codigo Oficial feito em java para a competição da First Robotics Competition
