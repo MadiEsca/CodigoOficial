@@ -18,6 +18,7 @@ public class TracaoControlada extends Command {
   public TracaoControlada(SistemaTracao sistemaTracao, CommandXboxController joy1) {
     this.sistemaTracao = sistemaTracao;
     this.joystick1 = joy1;
+
     addRequirements(sistemaTracao);
   }
 
@@ -31,10 +32,11 @@ public class TracaoControlada extends Command {
   @Override
   public void execute() {
     valorX = joystick1.getRawAxis(Constants.JoysticsDeControle.controlarEsquerda) * sistemaTracao.estadoAtual.velocidade;
-    valorY = joystick1.getRawAxis(Constants.JoysticsDeControle.controlarDireita) * sistemaTracao.estadoAtual.velocidade;
+    valorY = joystick1.getRawAxis(Constants.JoysticsDeControle.motoresDireita) * sistemaTracao.estadoAtual.velocidade;
+
     sistemaTracao.arcadeMode(valorX, valorY);
   }
- 
+
   @Override
   public void end(boolean interrupted) {}
 

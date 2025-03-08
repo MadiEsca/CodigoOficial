@@ -12,38 +12,37 @@ public final class Constants {
     //ID dos axes
     //Semelhante ao LabVIEW
     public static int controlarEsquerda = 1;//Analógico Esquerdo(X)
-    public static int controlarDireita = 5;//Analógigo direito(Y)
-    public static int controlarDescerAlga = 1;
+    public static int motoresDireita = 4;//Analógigo direito(Y)
   }
   
   public static class ConstanteSistemaCoral {
-    public static int MotorCoralID = 2;
+    public static int SistemaCoralMotorsID = 2;
   }
 
   public static class ConstanteSistemaClimber {
-    public static int ClimberMotorsID = 6;
+    public static int SistemaClimberMotorsID = 6;
   }
   
   public static class ConstanteSistemaDescerAlga {
-    public static int DesceAMotorsIDMotorsID = 9;  
+    public static int DesceAlgaMotorsID = 9;  
     }
   
   public static class ConstanteSistemaPuxarAlga {
-    public static int SistemaPuxarAlgaID = 99;
+    public static int SistemaPuxarAlgaMotorsID = 10;
   }
     
   //Métodos enums -> Estados dos mecanismos
   public static enum EstadoClimber {
-    PARADO(0), CLIMBING(0.20), RECLIMBING(-0.20);
+    PARADO(0), CLIMBING(0.50), RECLIMBING(-0.50);
     public final double velocidade;
     
     private EstadoClimber(double velocidade){
       this.velocidade = velocidade;
     }
   }
-
+  
   public static enum EstadoCoral {
-    PARADO(0), ATIVADO(-0.29);
+    PARADO(0), ATIVADO(0.60), CONTRARIO(-0.60);
     public final double velocidade;
     
     private EstadoCoral(double velocidade){
@@ -51,22 +50,22 @@ public final class Constants {
     }
   }
 
-  public static enum EstadoDescerAlga {
-    PARADO(0), DESCE(0.20), SOBE(-0.20);
+  public static enum DescerAlgaEstado {
+    PARADO(0), DESCE(0.30), SOBE(-0.30);
     public final double velocidade;
     
-    private EstadoDescerAlga(double velocidade){
+    private DescerAlgaEstado(double velocidade){
       this.velocidade = velocidade;
     }
   }
 
-  public static enum EstadoPuxarAlga{
+  public static enum PuxarAlgaEstado{
     //Positivo Puxa
     //Negativo Solta
-    PARADO(0), PUXA(0.5), SOLTA(-0.5);
+    PARADO(0), PUXA(0.4), SOLTA(-0.4);
     public final double velocidade;
 
-    private EstadoPuxarAlga(double velocidade){
+    private PuxarAlgaEstado(double velocidade){
       this.velocidade = velocidade;
     }
   }

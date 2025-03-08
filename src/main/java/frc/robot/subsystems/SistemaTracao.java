@@ -24,16 +24,16 @@ import frc.robot.Constants.EstadoTracao;
 public class SistemaTracao extends SubsystemBase {
   public EstadoTracao estadoAtual = EstadoTracao.PARADO;
 
-  SparkMax motorDireitaFrente = new SparkMax(Constants.ConstantesTracao.IDmotorDireitaFrente, MotorType.kBrushed);
-  SparkMax motorDireitaTras = new SparkMax(Constants.ConstantesTracao.IDmotorDiretaTras, MotorType.kBrushed);
-  SparkMax motorEsquerdaTras = new SparkMax(Constants.ConstantesTracao.IDmotorEsquerdaTras, MotorType.kBrushed);
-  SparkMax motorEsquerdaFrente = new SparkMax(Constants.ConstantesTracao.IDmotorEsquerdaFrente, MotorType.kBrushed);
+  SparkMax rightMotorFront = new SparkMax(Constants.ConstantesTracao.IDmotorDireitaFrente, MotorType.kBrushed);
+  SparkMax rightMotorBack = new SparkMax(Constants.ConstantesTracao.IDmotorDiretaTras, MotorType.kBrushed);
+  SparkMax leftMotorBack = new SparkMax(Constants.ConstantesTracao.IDmotorEsquerdaTras, MotorType.kBrushed);
+  SparkMax leftMotorFront = new SparkMax(Constants.ConstantesTracao.IDmotorEsquerdaFrente, MotorType.kBrushed);
 
   SparkMaxConfig configMotorDireita = new SparkMaxConfig();
   SparkMaxConfig configMotorEsquerda = new SparkMaxConfig();
 
-  MotorControllerGroup agrupamentoMotoresEsquerda = new MotorControllerGroup(motorEsquerdaFrente, motorEsquerdaTras);
-  MotorControllerGroup agrupamenoMotoresDireita = new MotorControllerGroup(motorDireitaFrente, motorDireitaTras);
+  MotorControllerGroup agrupamentoMotoresEsquerda = new MotorControllerGroup(leftMotorFront, leftMotorBack);
+  MotorControllerGroup agrupamenoMotoresDireita = new MotorControllerGroup(rightMotorFront, rightMotorBack);
 
   DifferentialDrive tracao = new DifferentialDrive(agrupamentoMotoresEsquerda, agrupamenoMotoresDireita);
 
@@ -50,10 +50,10 @@ public class SistemaTracao extends SubsystemBase {
     configMotorDireita.smartCurrentLimit(60);
     configMotorEsquerda.smartCurrentLimit(60);
   
-    motorDireitaFrente.configure(configMotorDireita, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
-    motorDireitaTras.configure(configMotorDireita, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
-    motorEsquerdaFrente.configure(configMotorEsquerda, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
-    motorEsquerdaTras.configure(configMotorEsquerda, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+    rightMotorFront.configure(configMotorDireita, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+    rightMotorBack.configure(configMotorDireita, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+    leftMotorFront.configure(configMotorEsquerda, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+    leftMotorBack.configure(configMotorEsquerda, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
   }
 
   @Override
@@ -70,7 +70,7 @@ public class SistemaTracao extends SubsystemBase {
     tracao.stopMotor(); 
   }
 
-  public void DefinirEstadoMecanismo(EstadoTracao state){
+  public void SetCurrentState(EstadoTracao state){
     this.estadoAtual = state;
   } 
 }

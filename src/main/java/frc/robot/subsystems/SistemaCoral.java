@@ -14,10 +14,9 @@ import frc.robot.Constants;
 import frc.robot.Constants.EstadoCoral;
 
 public class SistemaCoral extends SubsystemBase {
-  public SparkMax coralMotor = new SparkMax(Constants.ConstanteSistemaCoral.MotorCoralID, MotorType.kBrushed);
+  public SparkMax coralMotor = new SparkMax(Constants.ConstanteSistemaCoral.SistemaCoralMotorsID, MotorType.kBrushed);
  
   SparkMaxConfig configCoralMotor = new SparkMaxConfig();
-  
   public EstadoCoral estadoAtual = EstadoCoral.PARADO;
 
   public SistemaCoral() {
@@ -29,18 +28,15 @@ public class SistemaCoral extends SubsystemBase {
 
   @Override
   public void periodic() {
-    if(estadoAtual == EstadoCoral.ATIVADO){
+    if(estadoAtual == EstadoCoral.ATIVADO || estadoAtual == EstadoCoral.CONTRARIO){
       coralMotor.set(estadoAtual.velocidade);
     } else{
-      coralMotor.set(-0.05);
+      coralMotor.set(0);
     }
   }
 
-  public void DefinirEstadoMecanismo(EstadoCoral state){
+  public void SetcurrentState(EstadoCoral state){
     this.estadoAtual = state;
   }
 
-  public double EncoderCoral(){
-    return coralMotor.getEncoder().getPosition();
-  }
 }
