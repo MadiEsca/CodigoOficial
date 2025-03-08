@@ -27,44 +27,41 @@ public class DefinirEstadoMecanismo extends InstantCommand {
     boolean currentStateDesceAOnly = false;
     boolean currentStatePuxaAOnly = false;
     boolean currentStateClimberOnly = false;
-                
-                        
+
+  public DefinirEstadoMecanismo(EstadoCoral estado) {
+    this.currentStateCoral = estado;
+    addRequirements(RobotContainer.sistemaCoral);
+    currentStateCoralOnly = true;
+  }
+  
+  public DefinirEstadoMecanismo(EstadoTracao estado) {
+    this.currentStateDriveTrain = estado;
+    addRequirements(RobotContainer.sistemaTracao);
+    currentStateDriveTrainOnly = true;
+  }
+  
+  
+  public DefinirEstadoMecanismo(DescerAlgaEstado estado) {
+    this.currentStateDesceA = estado;
+    addRequirements(RobotContainer.SistemaDescerAlga);
+    currentStateDesceAOnly = true;
+  }
+  
+  public DefinirEstadoMecanismo(PuxarAlgaEstado estado) {
+    this.currentStatePuxarA = estado;
+    addRequirements(RobotContainer.SistemaPuxarAlga);
+    currentStatePuxaAOnly = true;
             
-                            
-                            public DefinirEstadoMecanismo(EstadoCoral estado) {
-                              this.currentStateCoral = estado;
-                              addRequirements(RobotContainer.sistemaCoral);
-                              currentStateCoralOnly = true;
-                            }
-                        
-                            public DefinirEstadoMecanismo(EstadoTracao estado) {
-                              this.currentStateDriveTrain = estado;
-                              addRequirements(RobotContainer.sistemaTracao);
-                              currentStateDriveTrainOnly = true;
-                            }
-                        
-                            
-                            public DefinirEstadoMecanismo(DescerAlgaEstado estado) {
-                              this.currentStateDesceA = estado;
-                              addRequirements(RobotContainer.SistemaDescerAlga);
-                              currentStateDesceAOnly = true;
-                            }
-                        
-                            public DefinirEstadoMecanismo(PuxarAlgaEstado estado) {
-                              this.currentStatePuxarA = estado;
-                      addRequirements(RobotContainer.SistemaPuxarAlga);
-                      currentStatePuxaAOnly = true;
-                    
-            }
-                        public DefinirEstadoMecanismo(EstadoClimber estado) {
-                          this.currentStateClimber = estado;
-                      addRequirements(RobotContainer.SistemaClimber);
-                      currentStateClimberOnly = true;
+    }
+  public DefinirEstadoMecanismo(EstadoClimber estado) {
+    this.currentStateClimber = estado;
+    addRequirements(RobotContainer.SistemaClimber);
+    currentStateClimberOnly = true;
 
 }
             
     
-    @Override
+  @Override
   public void initialize() {
     if(currentStateCoralOnly) {
       RobotContainer.sistemaCoral.SetcurrentState(this.currentStateCoral);
