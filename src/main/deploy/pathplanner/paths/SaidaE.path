@@ -8,8 +8,8 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 7.358443027218614,
-        "y": 1.534355859285083
+        "x": 7.358323863636363,
+        "y": 1.5420738636363627
       },
       "isLocked": false,
       "linkedName": null
@@ -20,12 +20,12 @@
         "y": 1.5420738636363627
       },
       "prevControl": {
-        "x": 6.761060668351908,
-        "y": 1.528147379993704
+        "x": 6.761448863636364,
+        "y": 1.542073863636233
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "AutoE1"
     }
   ],
   "rotationTargets": [],

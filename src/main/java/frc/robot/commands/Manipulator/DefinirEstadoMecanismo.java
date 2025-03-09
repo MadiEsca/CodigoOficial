@@ -64,14 +64,14 @@ public class DefinirEstadoMecanismo extends InstantCommand {
   @Override
   public void initialize() {
     if(currentStateCoralOnly) {
-      RobotContainer.sistemaCoral.SetcurrentState(this.currentStateCoral);
+      RobotContainer.sistemaCoral.DefinirEstadoAtualMecanismo(this.currentStateCoral);
     } else if(currentStateDriveTrainOnly){
       RobotContainer.sistemaTracao.SetCurrentState(this.currentStateDriveTrain);
     }else if(currentStateDesceAOnly){
       RobotContainer.SistemaDescerAlga.SetCurrentState(this.currentStateDesceA);
     }else if(currentStateClimberOnly) {
       RobotContainer.SistemaClimber.SetcurrentState(this.currentStateClimber);
-    } else if(currentStatePuxaAOnly){
+    }else if(currentStatePuxaAOnly){
       RobotContainer.SistemaPuxarAlga.SetCurrentState(this.currentStatePuxarA);
     }
   } 

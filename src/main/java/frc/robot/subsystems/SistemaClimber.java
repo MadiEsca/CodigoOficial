@@ -12,10 +12,13 @@ import com.revrobotics.RelativeEncoder;
 import com.revrobotics.spark.SparkBase.PersistMode;
 import com.revrobotics.spark.SparkBase.ResetMode;
 import com.revrobotics.spark.SparkClosedLoopController;
+
+import edu.wpi.first.util.datalog.DoubleLogEntry;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.Constants.DescerAlgaEstado;
 import frc.robot.Constants.EstadoClimber;
+import frc.robot.Constants.LimiteEncoders;
 
 
 public class SistemaClimber extends SubsystemBase {
@@ -33,16 +36,49 @@ public class SistemaClimber extends SubsystemBase {
  
 @Override
   public void periodic() {
-    if(estadoAtual == EstadoClimber.CLIMBING || estadoAtual == EstadoClimber.RECLIMBING){
+    if(estadoAtual == EstadoClimber.CLIMBING && limiteMaxAtingido() || estadoAtual == EstadoClimber.RECLIMBING && limiteMinAtingido()){
       ClimberMotor.set(estadoAtual.velocidade);
     } else{
       ClimberMotor.set(0);
     }
+    
+    //Verifica periodicamente se o Limite máximo foi atingido
+    limiteMaxAtingido();
+    
+    //Verifica periodicamente se o limite minimo foi atingido
+    limiteMinAtingido();
   }
   
     public void SetcurrentState(EstadoClimber state){
         this.estadoAtual = state;
     }
- 
+
+    //Configuração do Encoder
+    public double posicaoEncoder(){
+      return ClimberMotor.getEncoder().getPosition();
+    }
+
+    public void resetEncoder(){
+      ClimberMotor.getEncoder().setPosition(0);
+    }
+
+    
+
+    public boolean limiteMaxAtingido(){
+      if (posicaoEncoder() > LimiteEncoders.limiteMaxClimber){
+        return false;
+      } else{
+        return true;
+      }
+    }
+    
+    public boolean limiteMinAtingido(){
+      if (posicaoEncoder() < LimiteEncoders.limiteMinimo){
+        return false;
+      } else{
+        return true;
+      }
+    }
+    
   
   }

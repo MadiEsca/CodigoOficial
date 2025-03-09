@@ -15,42 +15,55 @@ import frc.robot.Constants.EstadoTracao;
 public class SistemaTracao extends SubsystemBase {
   public EstadoTracao estadoAtual = EstadoTracao.PARADO;
 
-  SparkMax motorDireitaFrente = new SparkMax(Constants.ConstantesTracao.IDmotorDireitaFrente, MotorType.kBrushed);
+  SparkMax motorDireitaMestre = new SparkMax(Constants.ConstantesTracao.IDmotorDireitaFrente, MotorType.kBrushed);
   SparkMax motorDireitaTras = new SparkMax(Constants.ConstantesTracao.IDmotorDiretaTras, MotorType.kBrushed);
-  SparkMax motorEsquerdaFrente = new SparkMax(Constants.ConstantesTracao.IDmotorEsquerdaTras, MotorType.kBrushed);
+  SparkMax motorEsquerdaMestre = new SparkMax(Constants.ConstantesTracao.IDmotorEsquerdaTras, MotorType.kBrushed);
   SparkMax motorEsquerdaTras = new SparkMax(Constants.ConstantesTracao.IDmotorEsquerdaFrente, MotorType.kBrushed);
 
+  SparkMaxConfig configMotorDireitaMestre = new SparkMaxConfig();
+  SparkMaxConfig configMotorEsquerdaMestre = new SparkMaxConfig();
   SparkMaxConfig configMotorDireita = new SparkMaxConfig();
   SparkMaxConfig configMotorEsquerda = new SparkMaxConfig();
 
-  MotorControllerGroup agrupamentoMotoresEsquerda = new MotorControllerGroup(motorEsquerdaTras, motorEsquerdaFrente);
-  MotorControllerGroup agrupamenoMotoresDireita = new MotorControllerGroup(motorDireitaFrente, motorDireitaTras);
+  //MotorControllerGroup agrupamentoMotoresEsquerda = new MotorControllerGroup(motorEsquerdaTras, motorEsquerdaMestre);
+  //MotorControllerGroup agrupamenoMotoresDireita = new MotorControllerGroup(motorDireitaMestre, motorDireitaTras);
 
-  DifferentialDrive tracao = new DifferentialDrive(agrupamentoMotoresEsquerda, agrupamenoMotoresDireita);
+  DifferentialDrive tracao = new DifferentialDrive(motorEsquerdaMestre, motorDireitaMestre);
 
-
+  
   public SistemaTracao() {
 
-    configMotorDireita
+    configMotorDireitaMestre
       .inverted(true)
       .idleMode(IdleMode.kBrake);
 
+    configMotorEsquerdaMestre
+      .inverted(true)
+      .idleMode(IdleMode.kBrake);
+
+    configMotorDireita
+      .inverted(true)
+      .idleMode(IdleMode.kBrake)
+      .follow(motorDireitaMestre);
+
     configMotorEsquerda
       .inverted(false)
-      .idleMode(IdleMode.kBrake);
+      .idleMode(IdleMode.kBrake)
+      .follow(motorEsquerdaMestre);
 
     configMotorDireita.smartCurrentLimit(60);
     configMotorEsquerda.smartCurrentLimit(60);
   
-    motorDireitaFrente.configure(configMotorDireita, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+    motorDireitaMestre.configure(configMotorDireita, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
     motorDireitaTras.configure(configMotorDireita, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
     motorEsquerdaTras.configure(configMotorEsquerda, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
-    motorEsquerdaFrente.configure(configMotorEsquerda, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+    motorEsquerdaMestre.configure(configMotorEsquerda, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
   }
 
   @Override
   public void periodic() {}
 
+  //Configuração das formas de driver
   public void arcadeMode(double valorX, double valorY){
     tracao.arcadeDrive(valorX, valorY);
   }
@@ -64,5 +77,7 @@ public class SistemaTracao extends SubsystemBase {
 
   public void SetCurrentState(EstadoTracao state){
     this.estadoAtual = state;
-  } 
+  }
+
+  //Definir as configurações do Encoder
 }

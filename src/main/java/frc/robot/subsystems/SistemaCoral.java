@@ -35,8 +35,9 @@ public class SistemaCoral extends SubsystemBase {
     }
   }
 
-  public void SetcurrentState(EstadoCoral state){
+  public void DefinirEstadoAtualMecanismo(EstadoCoral state){
     this.estadoAtual = state;
   }
 
+  //Mecanismo sem Encoder
 }

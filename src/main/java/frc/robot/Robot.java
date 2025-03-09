@@ -10,6 +10,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.Subsystem;
+import frc.robot.subsystems.SistemaClimber;
+import frc.robot.subsystems.SistemaPuxarAlga;
 
 
 public class Robot extends TimedRobot {
@@ -20,6 +22,13 @@ public class Robot extends TimedRobot {
   public void robotInit() {
 
     m_robotContainer = new RobotContainer();
+
+    //Resetando o valor dos encoders
+    RobotContainer.SistemaClimber.resetEncoder();
+    RobotContainer.SistemaDescerAlga.resetEncoder();
+    RobotContainer.SistemaPuxarAlga.resetEncoder();
+    //TODO
+    //RESETAR O ENCODER DA TRAÇÃO
   }
 
   
@@ -28,10 +37,13 @@ public class Robot extends TimedRobot {
     
     CommandScheduler.getInstance().run();
     
-    //Mostra o valor atual da corrente que está sendo passada
-    SmartDashboard.putNumber("Posição Encoderl", RobotContainer.SistemaPuxarAlga.PuxarAlgaMotor.getEncoder().getPosition());
-    
-  }
+    //Valores do Encoder
+    SmartDashboard.putNumber("Encoder Climber", RobotContainer.SistemaClimber.posicaoEncoder());
+    SmartDashboard.putNumber("Encoder Puxar Alga", RobotContainer.SistemaPuxarAlga.posicaoEncoder());
+    SmartDashboard.putNumber("Encoder Descer Alga", RobotContainer.SistemaDescerAlga.posicaoEncoder());
+    SmartDashboard.putBoolean("O limite maximo do climber nao foi atingido", RobotContainer.SistemaClimber.limiteMaxAtingido());
+    SmartDashboard.putBoolean("O limite minimo do climber nao foi atingido", RobotContainer.SistemaClimber.limiteMinAtingido());
+    }
 
   @Override
   public void disabledInit() {}

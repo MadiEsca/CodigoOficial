@@ -30,6 +30,14 @@ public final class Constants {
   public static class ConstanteSistemaPuxarAlga {
     public static int SistemaPuxarAlgaMotorsID = 10;
   }
+
+  public static class LimiteEncoders {
+    //Define o limite de rotação dos encoders
+    public static double limiteMinimo = 0.0;
+    public static double limiteTeste = 20.0;
+    public static double limiteMaxClimber = 190.0;
+  }
+
     
   //Métodos enums -> Estados dos mecanismos
   public static enum EstadoClimber {

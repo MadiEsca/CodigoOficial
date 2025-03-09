@@ -6,16 +6,19 @@ import frc.robot.Constants.EstadoTracao;
 import frc.robot.Constants.PuxarAlgaEstado;
 //import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.TracaoControlada;
-import com.pathplanner.*;
-import com.pathplanner.lib.auto.NamedCommands;
-
 //import frc.robot.commands.ClimberJoy;
-import edu.wpi.first.wpilibj.RobotBase;
 import frc.robot.subsystems.SistemaPuxarAlga;
 import frc.robot.commands.Manipulator.DefinirEstadoMecanismo;
 import frc.robot.subsystems.SistemaTracao;
 import frc.robot.subsystems.SistemaClimber;
 import frc.robot.subsystems.SistemaCoral;
+
+import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
+import com.pathplanner.lib.auto.AutoBuilder;
+
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.subsystems.SistemaDescerAlga;
 import frc.robot.Constants.DescerAlgaEstado; 
@@ -36,8 +39,8 @@ public static final SistemaClimber SistemaClimber = new SistemaClimber();
   CommandXboxController joystick2 = new CommandXboxController(1);
 
   public RobotContainer() {
-  configureBindings();
-  defaultcommands();
+    configureBindings();
+    defaultcommands();
   }
   
   private void configureBindings() {

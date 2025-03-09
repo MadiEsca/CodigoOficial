@@ -12,9 +12,10 @@ import com.revrobotics.spark.SparkClosedLoopController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.Constants.DescerAlgaEstado;
+import frc.robot.Constants.LimiteEncoders;
 
 public class SistemaDescerAlga extends SubsystemBase {
-  public SparkMax DesceAMotor = new SparkMax(Constants.ConstanteSistemaDescerAlga.DesceAlgaMotorsID, MotorType.kBrushless);
+  public SparkMax DesceAlgaMotor = new SparkMax(Constants.ConstanteSistemaDescerAlga.DesceAlgaMotorsID, MotorType.kBrushless);
  
   SparkMaxConfig configSparkMotor = new SparkMaxConfig();
 
@@ -23,19 +24,44 @@ public class SistemaDescerAlga extends SubsystemBase {
   public SistemaDescerAlga() {
     configSparkMotor.inverted(true).idleMode(IdleMode.kBrake);
   
-      DesceAMotor.configure(configSparkMotor, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+      DesceAlgaMotor.configure(configSparkMotor, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
   } 
 
   @Override
   public void periodic() {
     if(estadoAtual == DescerAlgaEstado.DESCE ||/*operador "OU" ||*/ estadoAtual == DescerAlgaEstado.SOBE ){
-        DesceAMotor.set(estadoAtual.velocidade);
+        DesceAlgaMotor.set(estadoAtual.velocidade);
     } else{
-        DesceAMotor.set(0);
+        DesceAlgaMotor.set(0);
     }
   }
 
   public void SetCurrentState(DescerAlgaEstado estado){
     this.estadoAtual = estado;
+  }
+
+  //Configuração do Encoder
+  public double posicaoEncoder(){
+    return DesceAlgaMotor.getEncoder().getPosition();
+  }
+
+  public void resetEncoder(){
+    DesceAlgaMotor.getEncoder().setPosition(0);
+  }
+  
+  public boolean limiteMaxAtingido(){
+    if (posicaoEncoder() > LimiteEncoders.limiteMaxClimber){
+      return false;
+    } else{
+      return true;
+    }
+  }
+  
+  public boolean limiteMinAtingido(){
+    if (posicaoEncoder() < LimiteEncoders.limiteMinimo){
+      return false;
+    } else{
+      return true;
+    }
   }
 }

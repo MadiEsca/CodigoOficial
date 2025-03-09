@@ -31,15 +31,14 @@ public class SistemaPuxarAlga extends SubsystemBase {
 
   public SistemaPuxarAlga() {
     configuracaoMotorSistemaPuxarAlga.inverted(true).idleMode(IdleMode.kBrake);
-  
   }
 
   @Override
   public void periodic() {
-if(estadoAtual == PuxarAlgaEstado.PUXA ||/*operador "OU" ||*/ estadoAtual == PuxarAlgaEstado.SOLTA ){
-  PuxarAlgaMotor.set(estadoAtual.velocidade);
-    } else{
-      PuxarAlgaMotor.set(0);
+    if(estadoAtual == PuxarAlgaEstado.PUXA ||/*operador "OU" ||*/ estadoAtual == PuxarAlgaEstado.SOLTA ){
+      PuxarAlgaMotor.set(estadoAtual.velocidade);
+    }else{
+      PuxarAlgaMotor.set(PuxarAlgaEstado.PARADO.velocidade);
     }
   
     ///////////////////////////////////////////////////////////////////////////////////
@@ -57,5 +56,12 @@ if(estadoAtual == PuxarAlgaEstado.PUXA ||/*operador "OU" ||*/ estadoAtual == Pux
     this.estadoAtual = estado;
   }
 
- 
+  //Configuração do Encoder
+  public double posicaoEncoder(){
+    return PuxarAlgaMotor.getEncoder().getPosition();
+  }
+  
+  public void resetEncoder(){
+    PuxarAlgaMotor.getEncoder().setPosition(0);
+  }
 }
