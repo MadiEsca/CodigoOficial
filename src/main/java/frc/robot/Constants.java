@@ -11,8 +11,8 @@ public final class Constants {
   public static class JoysticsDeControle {
     //ID dos axes
     //Semelhante ao LabVIEW
-    public static int controlarEsquerda = 1;//Analógico Esquerdo(X)
-    public static int motoresDireita = 4;//Analógigo direito(Y)
+    public static int valorX = 1;//Analógico Esquerdo(X)
+    public static int valorY = 4;//Analógigo direito(Y)
   }
   
   public static class ConstanteSistemaCoral {
