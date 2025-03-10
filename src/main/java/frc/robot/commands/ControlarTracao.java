@@ -1,13 +1,11 @@
 package frc.robot.commands;
 
 import frc.robot.Constants;
-import frc.robot.RobotContainer;
 import frc.robot.subsystems.SistemaTracao;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 
-public class TracaoControlada extends Command {
+public class ControlarTracao extends Command {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
 
   double valorX;
@@ -15,7 +13,7 @@ public class TracaoControlada extends Command {
   private final SistemaTracao sistemaTracao;
   private final CommandXboxController joystick1;
   
-  public TracaoControlada(SistemaTracao sistemaTracao, CommandXboxController joy1) {
+  public ControlarTracao(SistemaTracao sistemaTracao, CommandXboxController joy1) {
     this.sistemaTracao = sistemaTracao;
     this.joystick1 = joy1;
 

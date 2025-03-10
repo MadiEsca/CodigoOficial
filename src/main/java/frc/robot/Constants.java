@@ -1,5 +1,7 @@
 package frc.robot;
 
+import com.pathplanner.lib.config.RobotConfig;
+
 public final class Constants {
   public static class ConstantesTracao {
     public static int IDmotorDireitaFrente = 13;
@@ -31,11 +33,16 @@ public final class Constants {
     public static int SistemaPuxarAlgaMotorsID = 10;
   }
 
-  public static class LimiteEncoders {
+  public static class LimiteEncoderClimber {
     //Define o limite de rotação dos encoders
     public static double limiteMinimo = 0.0;
-    public static double limiteTeste = 20.0;
-    public static double limiteMaxClimber = 190.0;
+    public static double limiteMaxClimber = 1.3;
+  }
+
+  public static class LimiteEncoderDescerAlga {
+    //Define o limite de rotação dos encoders
+    public static double limiteMinimo = 0.08;
+    public static double limiteMax = 1.1;
   }
 
     

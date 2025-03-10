@@ -1,17 +1,10 @@
 package frc.robot;
 
-import com.fasterxml.jackson.databind.ser.std.StdKeySerializers.Default;
-
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import edu.wpi.first.wpilibj2.command.Subsystem;
-import frc.robot.subsystems.SistemaClimber;
-import frc.robot.subsystems.SistemaPuxarAlga;
 
 
 public class Robot extends TimedRobot {
@@ -31,6 +24,12 @@ public class Robot extends TimedRobot {
     //RESETAR O ENCODER DA TRAÇÃO
   }
 
+  //CONFIGURÇÃO DO AUTONOMO
+  
+
+
+  //RESTANTE DAS CONFIGURAÇÕES
+
   
   @Override
   public void robotPeriodic() {
@@ -38,11 +37,14 @@ public class Robot extends TimedRobot {
     CommandScheduler.getInstance().run();
     
     //Valores do Encoder
-    SmartDashboard.putNumber("Encoder Climber", RobotContainer.SistemaClimber.posicaoEncoder());
-    SmartDashboard.putNumber("Encoder Puxar Alga", RobotContainer.SistemaPuxarAlga.posicaoEncoder());
-    SmartDashboard.putNumber("Encoder Descer Alga", RobotContainer.SistemaDescerAlga.posicaoEncoder());
+    SmartDashboard.putNumber("Encoder Climber", RobotContainer.SistemaClimber.posicaoEncoder()*100);
+    SmartDashboard.putNumber("Encoder Puxar Alga", RobotContainer.SistemaPuxarAlga.posicaoEncoder()*1000);
+    SmartDashboard.putNumber("Encoder Descer Alga", RobotContainer.SistemaDescerAlga.posicaoEncoder()*1000);
     SmartDashboard.putBoolean("O limite maximo do climber nao foi atingido", RobotContainer.SistemaClimber.limiteMaxAtingido());
+    SmartDashboard.putString("AVISOS!", "Quando o boolean estiver VERMELHO, NÃO SERÁ MAIS POSSÍVEL DESCER");
+    SmartDashboard.putString("AVISOS!!", "SEMPRE RETRAIR OS MECANISMOS");
     SmartDashboard.putBoolean("O limite minimo do climber nao foi atingido", RobotContainer.SistemaClimber.limiteMinAtingido());
+    SmartDashboard.putNumber("Tempo de Partida", DriverStation.getMatchTime());
     }
 
   @Override

@@ -5,7 +5,7 @@ import frc.robot.Constants.EstadoCoral;
 import frc.robot.Constants.EstadoTracao;
 import frc.robot.Constants.PuxarAlgaEstado;
 //import frc.robot.Constants.OperatorConstants;
-import frc.robot.commands.TracaoControlada;
+import frc.robot.commands.ControlarTracao;
 //import frc.robot.commands.ClimberJoy;
 import frc.robot.subsystems.SistemaPuxarAlga;
 import frc.robot.commands.Manipulator.DefinirEstadoMecanismo;
@@ -68,6 +68,6 @@ public static final SistemaClimber SistemaClimber = new SistemaClimber();
   // CABO
   }
   private void defaultcommands(){
-  sistemaTracao.setDefaultCommand(new TracaoControlada(sistemaTracao, joystick1));
+    sistemaTracao.setDefaultCommand(new ControlarTracao(sistemaTracao, joystick1));
 }
 }
